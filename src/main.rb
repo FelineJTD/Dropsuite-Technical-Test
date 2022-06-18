@@ -1,10 +1,15 @@
 require 'fileutils'
 
-path = '../test/DropsuiteTest/**/*'
+if ARGV.length != 1
+  puts 'Usage: ruby main.rb <path>'
+  exit
+end
+
+path = ARGV[0]
 
 num_of_same_content = {}
 
-Dir.glob(path).each do |file|
+Dir.glob(path + '/**/*').each do |file|
   next if File.directory?(file) # skip the loop if file is a directory
 
   same = false # set same to false
@@ -25,5 +30,5 @@ num_of_same_content = num_of_same_content.sort_by { |k, v| v } # sort hash by va
 file, occurences = num_of_same_content.last # get the last file (the most common)
 
 file = File.open(file) # read file content
-puts file.read, occurences
+puts file.read + " " + occurences.to_s # output
 file.close # close file
