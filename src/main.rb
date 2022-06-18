@@ -1,11 +1,16 @@
 require 'fileutils'
 
 if ARGV.length != 1
-  puts 'Usage: ruby main.rb <path>'
+  puts 'Usage: ruby main.rb <path/to/directory>'
   exit
 end
 
 path = ARGV[0]
+
+if !File.directory?(path) # check if the path is a directory
+  puts 'The path is not a directory'
+  exit
+end
 
 num_of_same_content = {}
 
@@ -29,6 +34,10 @@ end
 num_of_same_content = num_of_same_content.sort_by { |k, v| v } # sort hash by values (number of occurences)
 file, occurences = num_of_same_content.last # get the last file (the most common)
 
-file = File.open(file) # read file content
-puts file.read + " " + occurences.to_s # output
-file.close # close file
+if file == nil # Directory is empty
+  puts 'Directory is empty'
+else
+  file = File.open(file) # read file content
+  puts file.read + " " + occurences.to_s # output
+  file.close # close file
+end
