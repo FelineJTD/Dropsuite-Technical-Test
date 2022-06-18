@@ -7,7 +7,10 @@ end
 
 path = ARGV[0]
 
-if !File.directory?(path) # check if the path is a directory
+if !File.exist?(path) # check if the path exists
+  puts 'The path does not exist'
+  exit
+elsif !File.directory?(path) # check if the path is a directory
   puts 'The path is not a directory'
   exit
 end
