@@ -20,3 +20,6 @@ _*the example folder is included in this repository in the `test` folder_
 ```
 ruby main.rb <path/to/directory>
 ```
+
+## How It Works
+The program scans the directory for files, each file will be compared to previous files (recorded in a hash table), and if a match is found, it is added to the number of occurences of the same file and the program stops the comparison and continues to the next file, otherwise if a match is not found, the file is considered a 'new' kind of file and registered to the hash table.
